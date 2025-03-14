@@ -15,7 +15,20 @@ async function fetchNews() {
 }
 
 fetchNews();
-
+const colors = [
+  "red",
+  "green",
+  "blue",
+  "orange",
+  "brown",
+  "purple",
+  "cyan",
+  "magenta",
+  "yellow",
+  "pink",
+];
+const badColors = ["cyan", "pink","yellow"]
+document.body.backgroundColor = "teal";
 function displayNews(articles) {
   const newsDiv = document.querySelector("#news");
   for (const article of articles) {
@@ -24,8 +37,23 @@ function displayNews(articles) {
     //create and append a headline to the articleDiv
     const title = document.createElement("h4");
     title.textContent = article.title;
+    const img = document.createElement("img");
+    img.style.width = "100%";
+    img.height = 500;
+    img.src = article.urlToImage;
     articleDiv.appendChild(title);
-
+    articleDiv.appendChild(img);
+    articleDiv.style.borderRadius = "15px";
+    let idx = Math.floor(Math.random() * colors.length);
+    articleDiv.style.background = colors[idx];
+    let mycolor;
+    if (badColors.includes(colors[idx])) {
+      mycolor = "black";
+    } else {
+      mycolor = "white";
+    }
+    articleDiv.style.color = mycolor;
+    articleDiv.style.marginBottom = '10px';
     // TODO: Use document.createElement and appendChild to create and append more elements
 
     newsDiv.appendChild(articleDiv);
